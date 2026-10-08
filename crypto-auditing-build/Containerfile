@@ -1,0 +1,16 @@
+FROM registry.fedoraproject.org/fedora:44
+
+VOLUME /work
+WORKDIR /work
+
+# hadolint ignore=DL3041
+RUN dnf install -y \
+		bpftool \
+		clang \
+		clang-libs \
+		libbpf-devel \
+		make \
+		rustfmt \
+	&& dnf clean all
+
+CMD ["make", "RELEASE=1"]
