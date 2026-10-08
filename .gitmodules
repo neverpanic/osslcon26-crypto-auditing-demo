@@ -1,3 +1,9 @@
 [submodule "demo-magic"]
 	path = demo-magic
 	url = https://github.com/paxtonhare/demo-magic
+[submodule "openssl"]
+	path = openssl
+	url = https://github.com/ueno/openssl.git
+[submodule "crypto-auditing"]
+	path = crypto-auditing
+	url = https://github.com/latchset/crypto-auditing.git
