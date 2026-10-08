@@ -1,0 +1,12 @@
+FROM registry.fedoraproject.org/fedora:44
+
+VOLUME /work
+WORKDIR /work
+
+# hadolint ignore=DL3041
+RUN dnf build-dep -y openssl \
+	&& dnf install -y redhat-rpm-config \
+	&& dnf clean all
+
+# hadolint ignore=DL3025
+CMD test -f configdata.pm || ./Configure enable-ec_nistp_64_gcc_128 zlib enable-rfc3779 enable-sctp enable-sslkeylog enable-cms -D_GNU_SOURCE no-mdc2 no-ec2m no-sm2 no-sm3 no-sm4 shared linux-aarch64 -O2 -flto=auto -ffat-lto-objects -fexceptions -g -grecord-gcc-switches -pipe -Wall -Wno-complain-wrong-lang -Werror=format-security -Wp,-U_FORTIFY_SOURCE,-D_FORTIFY_SOURCE=3 -Wp,-D_GLIBCXX_ASSERTIONS -specs=/usr/lib/rpm/redhat/redhat-hardened-cc1 -fstack-protector-strong -specs=/usr/lib/rpm/redhat/redhat-annobin-cc1 -mbranch-protection=standard -fasynchronous-unwind-tables -fstack-clash-protection -fno-omit-frame-pointer -mno-omit-leaf-frame-pointer -Wa,--noexecstack -Wa,--generate-missing-build-notes=yes -DPURIFY -Wl,-z,relro -Wl,--as-needed -Wl,-z,pack-relative-relocs -Wl,-z,now -specs=/usr/lib/rpm/redhat/redhat-hardened-ld -specs=/usr/lib/rpm/redhat/redhat-hardened-ld-errors -Wl,--build-id=sha1 '-DDEVRANDOM="\"/dev/urandom\""' -DOPENSSL_PEDANTIC_ZEROIZATION && make -j$(nproc)
