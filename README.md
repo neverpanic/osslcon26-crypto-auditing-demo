@@ -8,3 +8,6 @@ copy of OpenSSL, then starts the tracing and runs `openssl s_client` to show
 the events for a handshake.
 
 [crypto-auditing]: https://github.com/latchset/crypto-auditing/
+
+
+https://github.com/user-attachments/assets/208c6db2-3b3c-4189-98da-01a7975c1b78
